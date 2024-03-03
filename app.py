@@ -8,7 +8,7 @@ import requests
 
 file = open('config.json')
 config = json.load(file)
-backend_url = f'{config['backend']['protocol']}://{config['backend']['host']}:{config['backend']['port']}'
+backend_url = f"{config['backend']['protocol']}://{config['backend']['host']}:{config['backend']['port']}"
 print(backend_url)
 
 app = Flask(__name__)
@@ -56,9 +56,9 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        print(username, password)
 
         # Allows the session variables to be set without the backend server running
-        print(config)
         if config['debug']:
             session['logged_in'] = True
             session['username'] = username
@@ -68,11 +68,12 @@ def login():
             return redirect(url_for('dashboard'))
 
         # Gets the data from the server and uses it to set the session variables (or not)
-        res = requests.get(
+        res = requests.post(
             f'{backend_url}/authentication',
-            data={"username": username, "password": password})
+            json={"username": username, "password": password})
+        print(res.status_code)
         if res.status_code == 200:
-            session['is_logged_in'] = True
+            session['logged_in'] = True
             session['username'] = username
             session['token'] = res.json()['token']
             return redirect(url_for('dashboard', username=username))
@@ -82,7 +83,7 @@ def login():
     return render_template('index.html')
 
 
-@app.route('/dashboard', methods=['GET'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 @is_logged_in
 def dashboard():
     if request.method == 'POST':
@@ -110,10 +111,18 @@ def dashboard():
 
 
 @app.route('/logout', methods=['GET'])
-@is_logged_in
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+
+@app.route('/analyse', methods=['GET', 'POST'])
+@is_logged_in
+def analyse():
+    if request.method == 'POST':
+        pass
+
+    return render_template('')
 
 
 if __name__ == '__main__':
