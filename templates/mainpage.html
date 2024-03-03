@@ -36,29 +36,36 @@
     </style>
 </head>
 <body>
-    <div class="BG-box">
-        <div class="container">
-            <h1>Download Data</h1>
-            <form method="post">
-                <label for="count">Synthetic Data Count</label><br>
-                <input type="text" id="count" name="count" required><br><br>
+<div class="BG-box">
+    <div class="container">
+        <h1>Download Data</h1>
+        <form method="post">
+            <label for="count">Synthetic Data Count</label><br>
+            <input type="text" id="count" name="count" required><br><br>
 
-                <input type="submit" value="Download">
-            </form>
-        </div>
-        <a href="/logout">logout</a>
+            <input type="submit" value="Download">
+        </form>
+        <a href="/logout">
+            <button> Logout</button>
+        </a>
+        <a href="/analyse">
+            <button>Analyze Data</button>
+        </a>
     </div>
+</div>
+<div id="blah">
+</div>
 
-    <script>
-        for(let i = 0; i < 15; i++){
-          let parentEl = document.createElement("div");
-          parentEl.classList.add("strand");
-          parentEl.innerHTML = `
+<script>
+    for (let i = 0; i < 15; i++) {
+        let parentEl = document.createElement("div");
+        parentEl.classList.add("strand");
+        parentEl.innerHTML = `
             <div class="top" style="animation-delay:${i * -0.2}s"></div>
             <div class="bottom" style="animation-delay:${-1.5 - (i * 0.2)}s"></div>
           `
-          document.querySelector("body").appendChild(parentEl);
-        }
-    </script>
+        document.querySelector("#blah").appendChild(parentEl);
+    }
+</script>
 </body>
 </html>

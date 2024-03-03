@@ -2,7 +2,12 @@ import json
 import os
 from functools import wraps
 from io import BytesIO
-
+import numpy as np
+import joblib
+import pandas as pd
+import sklearn
+from sklearn import svm, preprocessing
+from sklearn.utils import shuffle
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
 import requests
 
@@ -109,6 +114,53 @@ def dashboard():
 
     return render_template('mainpage.html', username=session['username'])
 
+@app.route('/upload', methods=['POST'])
+@is_logged_in
+def upload_file():
+    if 'file'not in request.files:
+        return 'No file part'
+
+    file = request.files['file']
+
+
+    clf = joblib.load('tumor_class_mapping.pkl')
+
+    dp = pd.read_csv("data.csv", index_col=0)  # test
+    var = 'cgc_sample_sample_type'
+    tumor_stage_mapping = {0: 'Primary Tumor', 1: 'Solid Tissue Normal', 2: 'Recurrent Tumor'}
+    if dp[var].dtype != 'int':
+        if var in tumor_stage_mapping.values():
+            dp[var] = dp[var].map({v: k for k, v in tumor_stage_mapping.items()})
+    for column in dp.columns:
+        if dp[column].dtype != 'int':
+            dp[column] = dp[column].astype("category").cat.codes
+
+    dp = sklearn.utils.shuffle(dp)
+    dp = dp.dropna()
+    Xp = dp.drop(var, axis=1).values
+    Xp = preprocessing.scale(Xp)
+    Yp = dp[var].values
+
+    x_test = Xp  # [:-test_size]
+    y_test = Yp  # [:-test_size:]
+
+    numcor = 0
+    numin = 0
+    for X, y in zip(x_test, y_test):
+        prediction = clf.predict([X])[0]
+        rounded = int(np.round(prediction))
+        og = tumor_stage_mapping.get(rounded, "Unknown")
+        ogact = tumor_stage_mapping.get(y, "Unknown")
+        # print(original_value)
+        # print(f"Model: {prediction}, Actual:{y} ")
+        print(f"Model: {rounded}, Original Value: {og}, Actual: {ogact}")
+        if og == ogact:
+            numcor += 1
+        else:
+            numin += 1
+    total = numcor + numin
+    percor = (numcor / total) * 100
+    print(f"Percent correct: {percor}")
 
 @app.route('/logout', methods=['GET'])
 def logout():

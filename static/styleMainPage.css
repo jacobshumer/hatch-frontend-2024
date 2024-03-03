@@ -1,7 +1,17 @@
+
+.BG-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background: #809ea8;
+    border-radius: 5%;
+    width: 75%;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #96cdee;
-    margin: 0;
+    background-color: #2F3B69;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -11,17 +21,6 @@ body {
 
 
 }
-.BG-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  margin: auto;
-  width: 50%;
-  border: 3px solid #0a296b;
-    background-color: #809ea8;
-    height: 100%;
-}
 
 .container {
     text-align: center;
@@ -30,6 +29,7 @@ body {
 h1 {
     color: #333;
     margin-bottom: 20px;
+    font-family: "Holtwood One SC"
 }
 
 .download-btn {
@@ -46,6 +46,16 @@ h1 {
 
 .download-btn:hover {
     background-color: #0056b3;
+}
+#blah {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  margin: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .strand {
@@ -102,4 +112,5 @@ h1 {
     background-color: #2b84f0;
     z-index: 3;
   }
+
 }
