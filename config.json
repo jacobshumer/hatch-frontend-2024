@@ -1,0 +1,10 @@
+{
+  "backend": {
+    "protocol": "http",
+    "host": "localhost",
+    "port": 3000
+  },
+  "secret_key": "IOSTneiafu92138*(ufyn;",
+  "debug": true,
+  "flask_port": 5000
+}
