@@ -6,27 +6,26 @@
     <link rel="stylesheet" type="text/css" href="/static/style.css"/>
     <title>Sign In</title>
 </head>
-
 <body>
-<div class="container">
-    <div class="img">
-        <img src="/static/Gene_Shield.jpg" alt="Gene Shield">
+    <div class="container">
+        <div class="img">
+            <img src="/static/Gene_Shield.jpg" alt="Gene Shield">
+        </div>
+        <div class="form-box">
+            <form action="/login" method="post">
+                <h1>Sign In</h1>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+
+                <label for="tfa">2fa Secret Key: </label><br>
+                <input type="text" id="tfaAnswer" name="tfaAnswer" required><br><br>
+
+                <input type="submit" value="Sign In">
+            </form>
+        </div>
     </div>
-    <div class="form-box">
-        <form action="/login" method="post">
-            <h1>Sign In</h1>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br>
-
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
-
-            <label for="tfa">2fa Secret Key: </label><br>
-            <input type="text" id="tfaAnswer" name="tfaAnswer" required><br><br>
-
-            <input type="submit" value="Sign In">
-    </div>
-</div>
-</form>
 </body>
 </html>
