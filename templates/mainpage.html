@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download File</title>
+    <link rel="stylesheet" href="/static/styleMainPage.css">
+    <style>
+        .form-box {
+            resize: both;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="BG-box">
+        <div class="container">
+            <h1>Download Data</h1>
+            <form method="post">
+                <label for="count">Synthetic Data Count</label><br>
+                <input type="text" id="count" name="count" required><br><br>
+
+                <input type="submit" value="Download">
+            </form>
+        </div>
+        <a href="/logout">logout</a>
+    </div>
+
+</body>
+</html>

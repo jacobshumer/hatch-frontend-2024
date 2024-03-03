@@ -31,10 +31,38 @@ def login():
         return redirect(url_for('home'))
 
 
-@app.route('/dashboard/<username>')
-def dashboard(username):
-    user_info = allowed_users.get(username)
-    return render_template('dashboard.html', username=username, email=user_info['email'], tfa=user_info['tfa'], tfaAnswer=user_info['tfaAnswer'])
+@app.route('/dashboard', methods=['GET'])
+@is_logged_in
+def dashboard():
+    if request.method == 'POST':
+        count = request.form['count']
+        try:
+            count = int(count)
+        except ValueError:
+            return render_template('error.html', code='Please input a number.')
+
+        res = requests.get(
+            f'{backend_url}/data',
+            data={
+                "token": session['token'],
+                "count": count
+            }
+        )
+
+        if res.status_code == 200:
+            file_content = BytesIO(res.content)
+            return send_file(file_content, as_attachment=True)
+        else:
+            return render_template('error.html', code=res.status_code)
+
+    return render_template('mainpage.html', username=session['username'])
+
+
+@app.route('/logout', methods=['GET'])
+@is_logged_in
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 body {
             font-family: Arial, sans-serif;
-            background-color: #1799c4;
+            background-color: #2f3b69;
             margin: 100px;
             padding: 0px;
         }
@@ -9,37 +9,20 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 90vh;
+            background: #809ea8;
+            border-radius: 5%;
         }
 
-
-        .outerbox {
-            background-color: #f7ff09;
-            border-radius: 100px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .img {
             padding: 50px;
-            display: flex;
-        }
-
-
-        .box {
-            background-color: #ff0000;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            display: flex;
-        }
-
-        .form-box,
-        .image-box {
-            flex: 1;
-            padding: 40px;
-            color: #1ab779;
         }
 
         .form-box {
-            margin-right: 10px;
+            resize: ;
+
         }
+
 
         h1 {
             text-align: center;
@@ -52,7 +35,7 @@ body {
 
         input[type="text"],
         input[type="password"] {
-            width: calc(100% - 22px);
+            width: 500px;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -60,7 +43,7 @@ body {
         }
 
         input[type="submit"] {
-            width: 100%;
+            width: 500px;
             padding: 10px;
             background-color: #007bff;
             color: #fff;
@@ -74,14 +57,9 @@ body {
             background-color: #0056b3;
         }
 
-        .image-container {
-            flex: 1;
-            text-align: center;
-        }
 
         .image-container img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-            ima;
         }
